@@ -42,6 +42,7 @@ class Login extends CI_Controller {
     }
     
     function criar_usuario() {
+        
         // verifica se já existe o email cadastrado
         $valida = $this->valida_email();
         if (!$valida) {
