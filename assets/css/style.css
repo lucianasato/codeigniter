@@ -8,3 +8,9 @@ and open the template in the editor.
     Author     : luciana
 */
 
+
+.criar-conta {
+    max-width: 500px; 
+    margin: 0 auto; 
+    position: relative;
+}
