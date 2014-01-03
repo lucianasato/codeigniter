@@ -1,5 +1,3 @@
-
-
 <?php echo form_open('login/valida_usuario', 'class="form-signin" role="form"');?>
     <h2 class="form-signin-heading">Login</h2>
     <?php
