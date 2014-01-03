@@ -7,6 +7,8 @@ class Noticia extends CI_Controller {
         $this->load->library('pagination');
         $this->load->library('table');
         
+        
+        
         $config['base_url'] = base_url().'admin/noticia/index/';
         $config['uri_segment'] = 4;
         $config['use_page_numbers'] = FALSE;
@@ -56,6 +58,8 @@ class Noticia extends CI_Controller {
     }
     
     function add () {
+        $data['action'] = 'admin/noticia/cadastrar';
+        $data['label'] = 'Cadastrar';
         $data['content'] = 'noticia_form';
         $this->load->view('includes/template', $data);
     }
@@ -70,6 +74,37 @@ class Noticia extends CI_Controller {
             $this->noticia_model->novo();
             redirect('admin/noticia?msg=1');
         }
+        
+    }
+    
+    function atualizar () {
+        
+        $this->load->model('noticia_model');
+        
+        $this->noticia_model->atualizar();
+        redirect('admin/noticia?msg=2');
+        
+    }
+    
+    function edit() {
+        
+        $this->load->model('noticia_model');
+        $id = $this->uri->segment(4);
+        $data['row'] = $this->noticia_model->get_noticia($id);
+        
+        $data['action'] = 'admin/noticia/atualizar';
+        $data['label'] = 'Atualizar';
+        
+        $data['content'] = 'noticia_form';
+        $this->load->view('includes/template', $data);
+        
+    }
+    
+    function delete() {
+        
+        $this->load->model('noticia_model');
+        $this->noticia_model->excluir();
+        redirect('admin/noticia?msg=3');
         
     }
 }

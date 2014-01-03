@@ -67,4 +67,39 @@ class Noticia_model extends CI_Model {
     }
     
     
+    function atualizar() {
+       
+        $id = $this->input->post('id');
+        $update_data = array(
+            'id' => $id,
+            'titulo' => $this->input->post('titulo'),
+            'chamada'  => $this->input->post('chamada'),
+            'conteudo'  => $this->input->post('conteudo'),
+            'data_publicacao'  => $this->input->post('data_publicacao'),
+            'status'  => $this->input->post('status'),
+        );
+        
+        $this->db->where('id', $id);
+        $this->db->update('noticia', $update_data);
+        
+    }
+    
+    function get_noticia($id) {
+        
+        $sql = "SELECT * FROM noticia WHERE id = ?";
+        $result = $this->db->query($sql, array($id));
+        
+        return $result->row_array();
+        
+        
+    }
+    
+    function excluir () {
+        
+        $this->db->where('id', $this->uri->segment(4));
+        $this->db->delete('noticia');
+        
+    }
+    
+    
 }
