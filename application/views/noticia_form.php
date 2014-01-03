@@ -21,7 +21,6 @@
     $options = array(
                   '1'  => 'Ativo',
                   '0'    => 'Desativado',
-                 
                 );
 
     echo form_dropdown('status', $options, '1');

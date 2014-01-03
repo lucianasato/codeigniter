@@ -40,6 +40,7 @@
 
 $route['default_controller'] = "welcome";
 $route['404_override'] = '';
+$route['admin/(:any)/index/(:num)'] = "admin/$1/index/$2";
 $route['admin/(:any)/(:any)'] = "admin/$1/$2";
 $route['admin/home'] = "admin/home";
 

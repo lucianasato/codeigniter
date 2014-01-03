@@ -2,6 +2,16 @@
 
 class Noticia_model extends CI_Model {
     
+    var $gallery_path;
+    var $gallery_path_url;
+    
+    function noticia_model() {
+        
+        parent::__construct();
+        $this->gallery_path = realpath(APPPATH.'../images');
+        $this->gallery_path_url = base_url().'images/';
+    }
+    
     function valida() {
         
         $sql = "SELECT id FROM noticia WHERE titulo = ?";
@@ -16,12 +26,13 @@ class Noticia_model extends CI_Model {
     
     function novo() {
         
-        
+       
+        $upload_data = $this->upload->data(); 
         $insert_data = array(
            'titulo' => $this->input->post('titulo'),
            'chamada'  => $this->input->post('chamada'),
            'conteudo'  => $this->input->post('conteudo'),
-           'foto'  => $this->input->post('foto'),
+           'foto'  => $upload_data['file_name'],
            'data_publicacao'  => $this->input->post('data_publicacao'),
            'status'  => $this->input->post('status'),
        );
@@ -30,4 +41,30 @@ class Noticia_model extends CI_Model {
        return $insert;
        
     }
+    
+    function upload_image () {
+        
+        $config = array(
+            'allowed_types' => 'jpg|jpeg|gif|png',
+            'upload_path' => $this->gallery_path
+        );
+       
+        $this->load->library('upload', $config);
+        $this->upload->do_upload('foto');
+        
+        $image_data = $this->upload->data();
+        
+        $config2 = array(
+            'source_image' => $image_data['full_path'], 
+            'new_image' => $this->gallery_path . '/thumbs',
+            'maintain_ratio' => true,
+            'width' => 80, 
+            'height' => 80
+        );
+        
+        $this->load->library('image_lib', $config2);
+        $this->image_lib->resize();
+    }
+    
+    
 }
