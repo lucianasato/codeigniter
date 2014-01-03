@@ -1,3 +1,4 @@
+
 <?php 
     if ($this->input->get('msg') == 1)  { ?>
         <div class="alert alert-success">Notícia cadastrada com sucesso</div>
@@ -32,6 +33,7 @@
                         </td>
                         <td><?php echo $row->data_publicacao; ?></td>
                         <td><?php echo $row->status; ?></td>
+                        <td><a class="visualiza" id="noticia_<?php echo $row->id?>" href="javascript:void(0);">Visualiza</a></td>
                         <td><a href="<?php echo base_url(); ?>admin/noticia/edit/<?php echo $row->id; ?>">Editar</a></td>
                         <td><a href="<?php echo base_url(); ?>admin/noticia/delete/<?php echo $row->id; ?>">Excluir</a></td>
                     </tr>
@@ -44,4 +46,28 @@
         echo 'Nenhum resultado';
     endif;
 ?>
+
+<script type="text/javascript">
+    
+    $('.visualiza').click(function(){
+        
+        var data = {
+            id: $(this).attr('id'),
+            action: 'visualiza'
+        };
+        
+        $.ajax({
+            url: "<?php echo site_url('/admin/noticia/view')?>",
+            type: 'POST', 
+            data: data,
+            success: function(msg) {
+                alert(msg);
+                
+            }
+        });
+        
+        return false;
+        
+    });
+</script>
 

@@ -107,4 +107,20 @@ class Noticia extends CI_Controller {
         redirect('admin/noticia?msg=3');
         
     }
+    
+    function view () {
+        
+        $this->load->model('noticia_model');
+        $data_post = explode('_', $this->input->post('id'));
+        
+        $id = $data_post[1];
+        $data = $this->noticia_model->get_noticia($id);
+        
+        
+        $html = '';
+        $html .= '<div>'.$data['titulo'].'</div>'
+                . '<div>'.$data['conteudo'].'</div>';
+        
+        echo $html;
+    }
 }

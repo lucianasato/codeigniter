@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="<?php echo base_url();?>assets/css/docs.css"/>
         <link rel="stylesheet" href="<?php echo base_url();?>assets/css/style.css"/>
         <script src="<?php echo base_url();?>assets/js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url();?>assets/js/modal.js"></script>
         
     </head>
     <body>
